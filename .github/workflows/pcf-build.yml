@@ -1,0 +1,51 @@
+name: PCF Build
+
+on:
+    push:
+        branches:
+            - main
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v2
+
+            - name: Set up Node.js
+              uses: actions/setup-node@v2
+              with:
+                node-version: 14
+
+            - name: Install dependencies
+              run: npm install
+
+            - name: Build PCF Control
+              run: npm run build
+
+            - name: Archive PCF Control
+              uses: actions/upload-artifact@v2
+              with:
+                name: pcf-control
+                path: dist
+
+    deploy:
+        needs: build
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v2
+
+            - name: Set up Node.js
+              uses: actions/setup-node@v2
+              with:
+                node-version: 14
+
+            - name: Download PCF Control artifact
+              uses: actions/download-artifact@v2
+              with:
+                name: pcf-control
+
+            # Add your deployment steps here
