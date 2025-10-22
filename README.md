@@ -1,4 +1,4 @@
-# azureuploader
+# Azure Uploader
 
 Integrating Power Platform with Azure Storage Account doesn't have to be complex. Some times your users need to upload some files to be processed later. Imagine for example they need to send documents that a cloud flow (Power Automate) will then pick up and route to the relevant party to review or your AI in Copilot needs to extract information from them. In all these scenario you need a way that your users can send their files securely to an storage account which - unlike Dataverse - is not expensive.
 
